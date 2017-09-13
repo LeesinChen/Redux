@@ -10,10 +10,16 @@ import 'babel-polyfill';
 // home
 import Home from './Container/Home/Home';
 import LessonOne from './Container/LessonOne/LessonOne';
+import Add from './Container/Example/Add/Add';
 
+// reducer
+import reducerObj from './Reducer/index';
+
+// combineReducers 从 reducerObj 中拿到的是一个对象
 
 let store = createStore(
     combineReducers({
+        ...reducerObj,
         routing: routerReducer
     })
 );
@@ -23,7 +29,8 @@ ReactDom.render(
     <Provider store={store}>
         <Router history={history}>
             <Route path="/" component={Home}>
-                <Route path="LessonOne" component={LessonOne} />
+                <Route path="/lessonOne" component={LessonOne} />
+                <Route path="/example/add" component={Add} />
             </Route>
         </Router>
     </Provider>, document.getElementById('content')
