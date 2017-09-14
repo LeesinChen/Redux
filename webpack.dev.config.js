@@ -51,6 +51,13 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),   // 热更新插件
-        new webpack.NoErrorsPlugin()    // 即使有错误也不中断运行
+        new webpack.NoErrorsPlugin(),    // 即使有错误也不中断运行
+        // new webpack.optimize.UglifyJsPlugin({
+        //     compress: {
+        //         warnings: false, // 干掉warning
+        //         drop_debugger: true, // 干掉项目内的debugger
+        //         drop_console: false, //  设置true，干掉项目内的console
+        //     }
+        // }),
     ],
 }

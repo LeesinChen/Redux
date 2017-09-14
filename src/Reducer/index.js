@@ -1,7 +1,11 @@
-import add from './Example/Add/add';
+import addNumber from './Example/Add/addReducer';
+import tableModalVisible from './Example/TableExample/tableModalVisible';
+import tableAddPersonInfo from './Example/TableExample/tableAddPersonInfo';
 
 const reducerObj = {
-    add,
+    addNumber,
+    tableModalVisible,
+    tableAddPersonInfo,
 }
 
 export default reducerObj;

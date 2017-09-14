@@ -1,4 +1,4 @@
-function add(state = { number: 0 }, action) {
+function addNumberReducer(state = { number: 0 }, action) {
     switch (action.type) {
         case "RETURN":
             return {
@@ -6,7 +6,7 @@ function add(state = { number: 0 }, action) {
             }
         case "ADD_ONE":
             return {
-                number: state.number + 1
+                number: state.number + 1,
             }
         case "ADD_TWO":
             return {
@@ -16,8 +16,18 @@ function add(state = { number: 0 }, action) {
             return {
                 number: state.number + 3
             }
+        case "SHOW":
+            return {
+                ...state,
+                addModelShow: true,
+            }
+        case "HIDE":
+            return {
+                ...state,
+                addModelShow: false,
+            }
         default:
             return state
     }
 }
-export default add;
+export default addNumberReducer;
