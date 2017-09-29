@@ -33,14 +33,9 @@ class ComponentNesting extends Component {
                 dataIndex: 'sex',
                 key: 'sex',
             }, {
-                title: '操作',
+                title: '身份证号',
                 dataIndex: 'key',
-                key: 'x',
-                render: (data) => {
-                    return(
-                        <a data-id={data} onClick={this.props.removeDispatch({type: "REMOVE", idCard: data})}>删除</a>
-                    )
-                }
+                key: 'key'
             }
         ]
         return (
