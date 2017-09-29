@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Modal, Form, Input } from 'antd';
+import { Modal, Form, Input, Alert } from 'antd';
 const FormItem = Form.Item;
 
 // action creator  引入创建action的函数；
@@ -9,6 +9,9 @@ import actionCreator from '../action/actionCreator';
 class ComponentOne extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            errInfo: false, // 错误信息提示 是否显示  这个本组件是通过state控制，亦可通过redux管理
+        }
     }
 
     // modal弹出框点击确定 的回调函数
@@ -24,13 +27,31 @@ class ComponentOne extends Component {
         // 首先 校验必填项是否必填
         // this.props.form.validateFieldsAndScroll()  此方法是 antd Form.create()之后的方法 具体用法移步antd官方API
         this.props.form.validateFieldsAndScroll((err, data) => {
-            if (!err) {
-                if (data) { // 第一步拿到用户输入的信息 ==> data
+            if (!err) { // 第一步拿到用户输入的信息 ==> data 非err即各项都不为空
+                // 增加判断 是否已经有重复的人员信息
+                const personInfoData = this.props.tableData;
+                let repeat = false;
+                for (let i = 0; i < personInfoData.length; i++) {
+                    if (data.idCard == personInfoData[i].key || data.name == personInfoData[i].name) {
+                        // 有重复
+                        repeat = true
+                    }
+                }
+                if (!repeat) {
                     // 第二步 创建action
                     const action = actionCreator(data.name, data.sex, data.age, data.idCard);
                     // 第三步 dispatch action
                     this.props.addPerson(action);
                     this.props.handleCancel({type: 'MODAL_HIDE'});
+                } else {
+                    this.setState({
+                        errInfo: true
+                    });
+                    setTimeout(() => {
+                        this.setState({
+                            errInfo: false
+                        })
+                    }, 1800)
                 }
             }
         });
@@ -88,6 +109,9 @@ class ComponentOne extends Component {
                             )}
                         </FormItem>
                     </Form>
+                    {this.state.errInfo &&
+                        <Alert type="error" message="请不要添加重复人员！" banner />
+                    }
                 </Modal>
             </div>
         );
@@ -97,6 +121,7 @@ class ComponentOne extends Component {
 function mapStateToProps(state) {
     return {
         visible: state.tableModalVisible.visible,
+        tableData: state.tableAddPersonInfo,
     }
 }
 

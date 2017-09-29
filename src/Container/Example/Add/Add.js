@@ -7,7 +7,7 @@ import actionCreator from './action/actionCreator';
 class Add extends Component {
     constructor(props) {
         super(props);
-        console.log('props', props);
+        console.log('add组件内的props===>>>', props);
         this.clickOne = this.clickOne.bind(this);
         this.clickTwo = this.clickTwo.bind(this);
         this.clickThree = this.clickThree.bind(this);
@@ -66,7 +66,7 @@ class Add extends Component {
                 {this.props.addModelShow &&
                 <div>
                     <h2>工作流程：</h2>
-                    <h2>页面初始化，首先引入了react-redux的connect函数，我们使用这个函数，连建立起store与本组件的联系</h2>
+                    <h2>我们已经在顶层组件，使用react-redux的Provider组件包装store，页面初始化，首先用react-redux的</h2>
                     <h2>我们在connect()中传入了两个参数，mapStateToProps 和 mapDispatchToProps</h2>
                     <h2>第一个参数 mapStateToProps(state)，此state则是store中的state树，它返回一个对象，这个对象作为props传递到此组件中，你可以设置对象的key和value</h2>
                     <h2>第二个参数 mapDispatchToProps(dispatch)，此dispatch，就是store中的dispatch函数，它返回一个对象，这个对象定义了一些方法(这些方法主要就是执行相应的dispatch)，将这些方法映射到props中，然后我们就可以通过this.props.你定义的方法来dispatch action</h2>
@@ -84,7 +84,8 @@ class Add extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log('store中的Object tree===>>>', state);
+    // 这里的state参数  即是 store.getState() 拿到的state，也就是store内所有的state，我们可以在这里根据当前组件所需，取出自己所需要的state
+    console.log('add组件内的state====>>>>', state);
     return {
         number: state.addNumber.number,
         addModelShow: state.addNumber.addModelShow,

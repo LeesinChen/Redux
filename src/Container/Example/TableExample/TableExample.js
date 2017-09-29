@@ -34,8 +34,13 @@ class ComponentNesting extends Component {
                 key: 'sex',
             }, {
                 title: '操作',
+                dataIndex: 'key',
                 key: 'x',
-                render: () => <a href="#">删除</a>
+                render: (data) => {
+                    return(
+                        <a data-id={data} onClick={this.props.removeDispatch({type: "REMOVE", idCard: data})}>删除</a>
+                    )
+                }
             }
         ]
         return (
@@ -53,7 +58,6 @@ class ComponentNesting extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log('此时store内的 Object tree ===>>>', state)
     return {
         tableData: state.tableAddPersonInfo,
     }
@@ -62,6 +66,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         showModal: (action) => {
+            dispatch(action)
+        },
+        removeDispatch: (action) => {
             dispatch(action)
         }
     }
