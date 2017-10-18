@@ -19,7 +19,7 @@ function post(URL) {
             .then(() =>
                 // 可以多次 dispatch！
                 // 这里，使用 API 请求结果来更新应用的 state。
-                dispatch({type: 'SUCCESS_REQUEST', items: {name: 'zhangSan', age: 19, sex: "男"}})
+                dispatch({type: 'SUCCESS_REQUEST', items: {name: 'zhangSan', age: 19, sex: "男", key: '12'}})
             )
     }
 }
