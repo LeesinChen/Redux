@@ -7,7 +7,6 @@ import actionCreator from './action/actionCreator';
 class Add extends Component {
     constructor(props) {
         super(props);
-        console.log('add组件内的props===>>>', props);
         this.clickOne = this.clickOne.bind(this);
         this.clickTwo = this.clickTwo.bind(this);
         this.clickThree = this.clickThree.bind(this);
@@ -25,6 +24,7 @@ class Add extends Component {
 
     clickOne() {
         const action = actionCreator(1);
+        console.log('add===>>发送action===>>>', action);
         this.props.addOne(action);
     }
 
@@ -85,7 +85,6 @@ class Add extends Component {
 
 function mapStateToProps(state) {
     // 这里的state参数  即是 store.getState() 拿到的state，也就是store内所有的state，我们可以在这里根据当前组件所需，取出自己所需要的state
-    console.log('add组件内的state====>>>>', state);
     return {
         number: state.addNumber.number,
         addModelShow: state.addNumber.addModelShow,

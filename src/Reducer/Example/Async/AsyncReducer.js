@@ -1,4 +1,4 @@
-function asyncReducer(state = {status: false, items: []}, action) {
+function asyncReducer(state = {status: false, items: {}}, action) {
     switch (action.type) {
         case 'START_REQUEST':
             return {
@@ -12,10 +12,12 @@ function asyncReducer(state = {status: false, items: []}, action) {
         case 'FAIL_REQUEST':
             return {
                 status: false,
-                items: [],
+                items: {},
                 errorInfo: '请求失败'
             }
         default:
             return state;
     }
 }
+
+export default asyncReducer;

@@ -1,4 +1,5 @@
 function addNumberReducer(state = { number: 0, addModelShow: false }, action) {
+    console.log('我是add的reducer, 我接受到了action====>>>>', action);
     switch (action.type) {
         case "RETURN":
             return {
